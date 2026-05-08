@@ -195,34 +195,34 @@ const products = [
 // ── serviços extras (dos flyers) ────────────────────────────────
 const servicos = [
   {
-    emoji: "🚿",
-    name: "Resistência para Chuveiro",
-    desc: "Lorenzetti, Corona, Hydra e diversas marcas. Peças novas originais e compatíveis com qualidade e segurança.",
-    img: "/flyers/chuveiro.jpg",
+    emoji: "🏪",
+    name: "Nossa Loja em Niterói",
+    desc: "Venha nos visitar! Atendimento presencial especializado na R. Visconde do Uruguai, 264 — Centro, Niterói/RJ.",
+    img: "/flyers/loja.jpg",
+  },
+  {
+    emoji: "🧖",
+    name: "Manutenção em Sauna",
+    desc: "Assistência técnica especializada para saunas Albacete e outras marcas. Revisão elétrica e troca de resistência em todas as potências.",
+    img: "/flyers/sauna.jpg",
   },
   {
     emoji: "📡",
     name: "Conserto de Micro-ondas",
-    desc: "Diagnóstico, manutenção e troca de componentes de micro-ondas com atendimento técnico especializado.",
+    desc: "Diagnóstico, manutenção e troca de componentes com atendimento especializado. Serviço profissional e peças de qualidade.",
     img: "/flyers/microondas.jpg",
   },
   {
-    emoji: "🍳",
-    name: "Conserto de Equipamentos Industriais",
-    desc: "Manutenção especializada para fritadeiras, estufas e linha gastronômica. Peças de qualidade e serviço confiável.",
-    img: "/flyers/industrial.jpg",
+    emoji: "🍟",
+    name: "Resistências para Fritadeiras",
+    desc: "Soluções para fritadeiras elétricas comerciais com alto desempenho. Linha comercial, qualidade profissional e fabricação própria.",
+    img: "/flyers/fritadeira.jpg",
   },
   {
-    emoji: "⚗️",
-    name: "Resistência para Autoclaves",
-    desc: "Desempenho térmico, durabilidade e fabricação sob medida para autoclaves hospitalares e industriais.",
-    img: "/flyers/autoclave.jpg",
-  },
-  {
-    emoji: "🏥",
-    name: "Secadoras Hospitalares",
-    desc: "Eficiência térmica, segurança e peças sob medida para secadoras de uso hospitalar e industrial.",
-    img: "/flyers/secadora.jpg",
+    emoji: "☕",
+    name: "Resistências para Cafeteiras",
+    desc: "Reposição com qualidade profissional para diversos modelos. Alta durabilidade, fabricação própria e atendimento especializado.",
+    img: "/flyers/cafeteira.jpg",
   },
   {
     emoji: "⚓",
