@@ -195,28 +195,10 @@ const products = [
 // ── serviços extras (dos flyers) ────────────────────────────────
 const servicos = [
   {
-    emoji: "🏪",
-    name: "Nossa Loja em Niterói",
-    desc: "Venha nos visitar! Atendimento presencial especializado na R. Visconde do Uruguai, 264 — Centro, Niterói/RJ.",
-    img: "/flyers/loja.jpg",
-  },
-  {
-    emoji: "🧖",
-    name: "Manutenção em Sauna",
-    desc: "Assistência técnica especializada para saunas Albacete e outras marcas. Revisão elétrica e troca de resistência em todas as potências.",
-    img: "/flyers/sauna.jpg",
-  },
-  {
-    emoji: "📡",
-    name: "Conserto de Micro-ondas",
-    desc: "Diagnóstico, manutenção e troca de componentes com atendimento especializado. Serviço profissional e peças de qualidade.",
-    img: "/flyers/microondas.jpg",
-  },
-  {
-    emoji: "🍟",
-    name: "Resistências para Fritadeiras",
-    desc: "Soluções para fritadeiras elétricas comerciais com alto desempenho. Linha comercial, qualidade profissional e fabricação própria.",
-    img: "/flyers/fritadeira.jpg",
+    emoji: "🚿",
+    name: "Resistência para Chuveiro",
+    desc: "Lorenzetti, Corona, Hydra e diversas marcas. Peças novas originais e compatíveis com qualidade e segurança.",
+    img: "/flyers/chuveiro.jpg",
   },
   {
     emoji: "☕",
@@ -225,10 +207,28 @@ const servicos = [
     img: "/flyers/cafeteira.jpg",
   },
   {
-    emoji: "⚓",
-    name: "Resistências Navais",
-    desc: "Para embarcações e equipamentos navais. Alta resistência à corrosão, durabilidade e fabricação sob medida.",
-    img: null,
+    emoji: "⚗️",
+    name: "Resistências para Autoclaves",
+    desc: "Desempenho térmico, durabilidade e fabricação sob medida para autoclaves hospitalares e industriais.",
+    img: "/flyers/autoclave.jpg",
+  },
+  {
+    emoji: "🏥",
+    name: "Secadoras Hospitalares",
+    desc: "Eficiência térmica, segurança e peças sob medida para secadoras de uso hospitalar e industrial.",
+    img: "/flyers/secadora.jpg",
+  },
+  {
+    emoji: "🍞",
+    name: "Resistência para Fornos",
+    desc: "Fabricamos todos os tipos de resistências para fornos industriais e comerciais. Alta durabilidade e qualidade profissional.",
+    img: "/flyers/forno.jpg",
+  },
+  {
+    emoji: "🍲",
+    name: "Resistências para Banho-Maria",
+    desc: "Calor uniforme para uso profissional. Reposição com qualidade, modelos variados e atendimento especializado.",
+    img: "/flyers/banhomaria.jpg",
   },
 ];
 
