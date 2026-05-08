@@ -201,20 +201,14 @@ const servicos = [
     img: "/flyers/chuveiro.jpg",
   },
   {
-    emoji: "📡",
-    name: "Conserto de Micro-ondas",
-    desc: "Diagnóstico, manutenção e troca de componentes de micro-ondas com atendimento técnico especializado.",
-    img: "/flyers/microondas.jpg",
-  },
-  {
-    emoji: "🍳",
-    name: "Conserto de Equipamentos Industriais",
-    desc: "Manutenção especializada para fritadeiras, estufas e linha gastronômica. Peças de qualidade e serviço confiável.",
-    img: "/flyers/industrial.jpg",
+    emoji: "☕",
+    name: "Resistências para Cafeteiras",
+    desc: "Reposição com qualidade profissional para diversos modelos. Alta durabilidade, fabricação própria e atendimento especializado.",
+    img: "/flyers/cafeteira.jpg",
   },
   {
     emoji: "⚗️",
-    name: "Resistência para Autoclaves",
+    name: "Resistências para Autoclaves",
     desc: "Desempenho térmico, durabilidade e fabricação sob medida para autoclaves hospitalares e industriais.",
     img: "/flyers/autoclave.jpg",
   },
@@ -225,10 +219,16 @@ const servicos = [
     img: "/flyers/secadora.jpg",
   },
   {
-    emoji: "⚓",
-    name: "Resistências Navais",
-    desc: "Para embarcações e equipamentos navais. Alta resistência à corrosão, durabilidade e fabricação sob medida.",
-    img: null,
+    emoji: "🍞",
+    name: "Resistência para Fornos",
+    desc: "Fabricamos todos os tipos de resistências para fornos industriais e comerciais. Alta durabilidade e qualidade profissional.",
+    img: "/flyers/forno.jpg",
+  },
+  {
+    emoji: "🍲",
+    name: "Resistências para Banho-Maria",
+    desc: "Calor uniforme para uso profissional. Reposição com qualidade, modelos variados e atendimento especializado.",
+    img: "/flyers/banhomaria.jpg",
   },
 ];
 
