@@ -1,38 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const WA_NUMBER = "5521965987979";
 const WA_URL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Olá! Vim pelo site da Casa RP Resistências e gostaria de fazer um orçamento.")}`;
+const EMAIL = "casarpresistenciaseletrica@gmail.com";
+const EMAIL_URL = `mailto:${EMAIL}?subject=Orçamento - Casa RP Resistências`;
 const IG_URL = "https://instagram.com/rp_resistencias";
 const SHOPEE_URL = "https://shopee.com.br/casarp";
+const FB_URL = "https://facebook.com/casarpresistencias";
+const GOOGLE_URL = "https://share.google/mSyFVx1wQX8W0FIFe";
 const MAPS_URL = "https://maps.google.com/?q=Rua+Visconde+do+Uruguai+264+Centro+Niteroi+RJ";
 
-const products = [
-  { icon: "🚿", tag: "Doméstico", name: "Resistência para Chuveiro", desc: "Lorenzetti, Corona, Hydra e diversas marcas. Peças novas com qualidade e segurança." },
-  { icon: "🍟", tag: "Comercial", name: "Resistência para Fritadeiras", desc: "Linha comercial com alto desempenho. Fabricação própria e sob medida." },
-  { icon: "📡", tag: "Conserto", name: "Conserto de Micro-ondas", desc: "Diagnóstico, manutenção e troca de componentes com atendimento especializado." },
-  { icon: "🍳", tag: "Industrial", name: "Conserto de Equipamentos Industriais", desc: "Manutenção especializada para fritadeiras, estufas e linha gastronômica. Peças de qualidade e serviço confiável." },
-  { icon: "⚗️", tag: "Hospitalar", name: "Resistência para Autoclaves", desc: "Desempenho térmico, durabilidade e fabricação sob medida para autoclaves." },
-  { icon: "💧", tag: "Industrial", name: "Resistência de Imersão", desc: "Para aquecimento de água, boilers e aplicações industriais. Alta durabilidade." },
-  { icon: "🔩", tag: "Reposição", name: "Resistência Tubular U", desc: "Solução prática para reposição e manutenção de diversos equipamentos térmicos." },
-  { icon: "〰️", tag: "Reposição", name: "Resistência Tubular Ondulada", desc: "Aquecimento uniforme e ótimo desempenho para reposição em equipamentos variados." },
-  { icon: "🍲", tag: "Alimentício", name: "Resistência para Banho-Maria", desc: "Ideal para aquecer e manter a água pronta para uso no banho-maria comercial." },
-  { icon: "🏥", tag: "Hospitalar", name: "Secadoras Hospitalares", desc: "Eficiência térmica, segurança e peças sob medida para secadoras hospitalares." },
-  { icon: "〰", tag: "Sob Medida", name: "Fio Resistência", desc: "Precisão, durabilidade e excelente desempenho térmico. Fabricação sob medida." },
-  { icon: "⚓", tag: "Naval", name: "Resistências Navais", desc: "Para embarcações e equipamentos navais com alta resistência e durabilidade." },
-  { icon: "🏭", tag: "Fabricação", name: "Peças Sob Medida", desc: "Fabricação própria de resistências personalizadas para qualquer equipamento." },
-];
-
-const diferenciais = [
-  { icon: "✅", title: "Qualidade e Segurança", desc: "Produtos testados e certificados" },
-  { icon: "📦", title: "Peças Novas e Sob Medida", desc: "Fabricação própria e reposição original" },
-  { icon: "🎧", title: "Atendimento Especializado", desc: "Equipe técnica pronta para ajudar" },
-  { icon: "🚚", title: "Envio para Todo o Brasil", desc: "Entrega rápida e com segurança" },
-  { icon: "⚡", title: "Entrega Rápida", desc: "RJ, Niterói e São Gonçalo" },
-  { icon: "🔧", title: "Fabricação Própria", desc: "Soluções exclusivas sob medida" },
-];
-
+// ── ícones reutilizáveis ────────────────────────────────────────
 function WaIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -41,7 +22,6 @@ function WaIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function IgIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -49,7 +29,6 @@ function IgIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
 function ShopeeIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
@@ -57,20 +36,227 @@ function ShopeeIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+function FbIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+// ── produtos ────────────────────────────────────────────────────
+const products = [
+  {
+    emoji: "🔩", grad: "from-[#0a1a2e] to-[#0f2a45]",
+    tag: "Versátil", tagColor: "bg-blue-900/60 text-blue-300",
+    name: "Resistência Tubular de Inox",
+    price: "A partir de R$ 35,00",
+    desc: "Resistência versátil em aço inoxidável para aquecimento de líquidos e gases. Disponível nos formatos reto, U, duplo U e espiral.",
+    use: "Banho-maria, caldeiras, marmiteiros, aquecedores",
+    power: "200W – 6.000W (sob medida)",
+    voltage: "110V / 220V / 380V",
+    material: "Inox AISI 304/316",
+    obs: "Fabricação sob medida. Tempo de aquecimento: 3–10 min.",
+  },
+  {
+    emoji: "💧", grad: "from-[#001833] to-[#002a52]",
+    tag: "Industrial", tagColor: "bg-indigo-900/60 text-indigo-300",
+    name: "Resistência de Imersão",
+    price: "A partir de R$ 75,00",
+    desc: "Para imersão direta em líquidos como água, óleo e soluções industriais. Com flange ou rosca BSP para fixação no reservatório.",
+    use: "Tanques industriais, boilers, aquecedores, reservatórios",
+    power: "1.000W – 12.000W",
+    voltage: "110V / 220V / 380V (tri)",
+    material: "Inox ou cobre",
+    obs: "Aquecimento: 10–30 min. Flange ou rosca BSP sob medida.",
+  },
+  {
+    emoji: "🍲", grad: "from-[#1a0a00] to-[#3d1500]",
+    tag: "Restaurante", tagColor: "bg-amber-900/60 text-amber-300",
+    name: "Resistência para Banho-Maria",
+    price: "A partir de R$ 30,00",
+    desc: "Resistência específica para banho-maria de cozinhas profissionais. Compatível com Progás, Elgin, Croydon e outras marcas.",
+    use: "Restaurantes, buffets, hospitais, cozinhas industriais",
+    power: "300W – 2.000W",
+    voltage: "110V / 220V",
+    material: "Inox",
+    obs: "Aquecimento: 5–15 min. Peça sob medida ou original.",
+  },
+  {
+    emoji: "🍽️", grad: "from-[#1a0800] to-[#2d1200]",
+    tag: "Comercial", tagColor: "bg-orange-900/60 text-orange-300",
+    name: "Resistência para Buffet Self-Service",
+    price: "A partir de R$ 40,00",
+    desc: "Para balcões térmicos e buffets de self-service. Mantém os alimentos a temperatura segura e constante durante o serviço.",
+    use: "Restaurantes, lanchonetes, padarias, self-service",
+    power: "500W – 3.000W",
+    voltage: "110V / 220V",
+    material: "Inox",
+    obs: "Opera 60°C–90°C. Aquecimento: 5–20 min. Fabricação conforme o balcão.",
+  },
+  {
+    emoji: "🔌", grad: "from-[#1a0000] to-[#2d0000]",
+    tag: "Precisão", tagColor: "bg-red-900/60 text-red-300",
+    name: "Resistência Cartucho",
+    price: "A partir de R$ 20,00",
+    desc: "Resistência cilíndrica de alta densidade para aquecimento localizado e preciso. Ideal para moldes, ferramentas e máquinas industriais.",
+    use: "Moldes de injeção, selos, ferramentas, máquinas",
+    power: "50W – 2.000W",
+    voltage: "110V / 220V / 380V",
+    material: "Inox com núcleo MgO",
+    obs: "Diâmetros: 8, 10, 12, 16mm e outros. Aquecimento: 1–5 min.",
+  },
+  {
+    emoji: "⭕", grad: "from-[#0d0020] to-[#180033]",
+    tag: "Plástico", tagColor: "bg-purple-900/60 text-purple-300",
+    name: "Resistência Coleira Mica",
+    price: "A partir de R$ 25,00",
+    desc: "Em formato de anel, abraça o cilindro para aquecimento uniforme. Muito usada em extrusoras e injetoras de plástico.",
+    use: "Extrusoras, injetoras de plástico, cilindros industriais",
+    power: "100W – 5.000W",
+    voltage: "110V / 220V / 380V",
+    material: "Mica com fio Ni-Cr",
+    obs: "Medidas sob consulta — diâmetro e largura conforme equipamento.",
+  },
+  {
+    emoji: "🔧", grad: "from-[#0a0f1a] to-[#12192e]",
+    tag: "Alta Potência", tagColor: "bg-slate-700/60 text-slate-300",
+    name: "Resistência Flangeada",
+    price: "A partir de R$ 90,00",
+    desc: "Com flange para fixação em tanques e reservatórios. Alta capacidade de aquecimento para indústria e comércio.",
+    use: "Boilers, caldeiras, tanques industriais, aquecedores",
+    power: "1.000W – 18.000W",
+    voltage: "220V / 380V (mono/tri)",
+    material: "Inox ou aço carbono",
+    obs: "Flange 1\", 1.1/4\", 1.1/2\", 2\" e especiais. Aq.: 15–45 min.",
+  },
+  {
+    emoji: "🌬️", grad: "from-[#001a10] to-[#002d1c]",
+    tag: "Ar Quente", tagColor: "bg-teal-900/60 text-teal-300",
+    name: "Resistência Aletada",
+    price: "Sob consulta",
+    desc: "Tubular com aletas de alumínio para aquecimento eficiente de ar em passagem forçada. Alta eficiência em fornos de convecção.",
+    use: "Fornos de convecção, secadores industriais, aquecedores de ar",
+    power: "500W – 6.000W (sob medida)",
+    voltage: "220V / 380V",
+    material: "Tubo inox + aletas alumínio",
+    obs: "Pode ser usada em baterias. Aquecimento: 2–10 min.",
+  },
+  {
+    emoji: "🔴", grad: "from-[#1a0f00] to-[#2d1800]",
+    tag: "Infravermelho", tagColor: "bg-yellow-900/60 text-yellow-300",
+    name: "Resistência Cerâmica Infravermelha",
+    price: "A partir de R$ 55,00",
+    desc: "Emite calor por radiação infravermelha. Alta eficiência energética, longa vida útil e aquecimento imediato sem contato.",
+    use: "Sauna, secagem de tinta, termoplásticos, cabines de pintura",
+    power: "100W – 1.000W",
+    voltage: "110V / 220V",
+    material: "Corpo cerâmico + filamento Ni-Cr",
+    obs: "Vida útil: até 10.000h. Aquecimento: 1–3 min.",
+  },
+  {
+    emoji: "🏭", grad: "from-[#1a0800] to-[#331200]",
+    tag: "Forno", tagColor: "bg-orange-900/60 text-orange-300",
+    name: "Resistência para Forno Industrial",
+    price: "A partir de R$ 55,00",
+    desc: "Para fornos de panificação, confeitaria, pizzaria e câmaras de calor industriais. Suporta altas temperaturas com durabilidade.",
+    use: "Fornos padaria, pizzaria, confeitaria, câmaras de calor",
+    power: "1.000W – 8.000W",
+    voltage: "220V / 380V",
+    material: "Inox alta temperatura / quartzo",
+    obs: "Suporta acima de 300°C. Fabricação conforme o forno. Aq.: 5–20 min.",
+  },
+  {
+    emoji: "🔥", grad: "from-[#1a0200] to-[#2d0500]",
+    tag: "Doméstico", tagColor: "bg-red-900/60 text-red-300",
+    name: "Resistência para Churrasqueira Elétrica",
+    price: "A partir de R$ 35,00",
+    desc: "Para churrasqueiras elétricas domésticas e comerciais. Compatível com Mueller, Mondial, Cadence, Elgin e outras marcas.",
+    use: "Churrasqueiras elétricas e grelhadores comerciais",
+    power: "1.000W – 3.000W",
+    voltage: "110V / 220V",
+    material: "Inox / quartzo",
+    obs: "Peça original ou compatível disponível. Aquecimento: 5–15 min.",
+  },
+  {
+    emoji: "🧖", grad: "from-[#1a1000] to-[#2d1c00]",
+    tag: "Sauna", tagColor: "bg-amber-900/60 text-amber-300",
+    name: "Resistência para Sauna Seca",
+    price: "A partir de R$ 80,00",
+    desc: "Alta potência para saunas secas residenciais e comerciais. Opera em altas temperaturas com segurança e durabilidade certificada.",
+    use: "Saunas secas, spas, academias, clínicas",
+    power: "3.000W – 18.000W",
+    voltage: "220V / 380V",
+    material: "Inox com pedras vulcânicas",
+    obs: "Temperatura 70°C–100°C. Instalar com profissional habilitado. Aq.: 20–40 min.",
+  },
+];
+
+// ── serviços extras (dos flyers) ────────────────────────────────
+const servicos = [
+  {
+    emoji: "🚿",
+    name: "Resistência para Chuveiro",
+    desc: "Lorenzetti, Corona, Hydra e diversas marcas. Peças novas originais e compatíveis com qualidade e segurança.",
+    img: "/flyers/chuveiro.jpg",
+  },
+  {
+    emoji: "📡",
+    name: "Conserto de Micro-ondas",
+    desc: "Diagnóstico, manutenção e troca de componentes de micro-ondas com atendimento técnico especializado.",
+    img: "/flyers/microondas.jpg",
+  },
+  {
+    emoji: "🍳",
+    name: "Conserto de Equipamentos Industriais",
+    desc: "Manutenção especializada para fritadeiras, estufas e linha gastronômica. Peças de qualidade e serviço confiável.",
+    img: "/flyers/industrial.jpg",
+  },
+  {
+    emoji: "⚗️",
+    name: "Resistência para Autoclaves",
+    desc: "Desempenho térmico, durabilidade e fabricação sob medida para autoclaves hospitalares e industriais.",
+    img: "/flyers/autoclave.jpg",
+  },
+  {
+    emoji: "🏥",
+    name: "Secadoras Hospitalares",
+    desc: "Eficiência térmica, segurança e peças sob medida para secadoras de uso hospitalar e industrial.",
+    img: "/flyers/secadora.jpg",
+  },
+  {
+    emoji: "⚓",
+    name: "Resistências Navais",
+    desc: "Para embarcações e equipamentos navais. Alta resistência à corrosão, durabilidade e fabricação sob medida.",
+    img: null,
+  },
+];
+
+const diferenciais = [
+  { icon: "🏭", title: "Fabricação Sob Medida", desc: "Produzimos nas especificações exatas do seu equipamento — potência, voltagem, formato e material." },
+  { icon: "⚡", title: "Alta Durabilidade", desc: "Materiais de qualidade: inox AISI 304/316, mica, cerâmica e Ni-Cr para máxima vida útil." },
+  { icon: "🔧", title: "Atendimento Técnico", desc: "Orientamos sobre o tipo correto de resistência, potência e instalação para cada equipamento." },
+  { icon: "🍽️", title: "Múltiplos Equipamentos", desc: "Buffet, banho-maria, forno, churrasqueira, sauna, autoclave, marmiteiro e máquinas industriais." },
+  { icon: "✅", title: "Qualidade Garantida", desc: "Peças testadas antes do envio. Trabalhamos com produtos novos, originais e compatíveis." },
+  { icon: "🚚", title: "Envio para Todo o Brasil", desc: "Atendemos presencialmente em Niterói/RJ e enviamos para qualquer estado com entrega rápida." },
+];
 
 const tagColors: Record<string, string> = {
-  Doméstico: "bg-blue-900/60 text-blue-300",
-  Comercial: "bg-amber-900/60 text-amber-300",
-  Conserto: "bg-purple-900/60 text-purple-300",
-  Hospitalar: "bg-green-900/60 text-green-300",
-  Industrial: "bg-orange-900/60 text-orange-300",
-  Reposição: "bg-yellow-900/60 text-yellow-300",
-  Alimentício: "bg-red-900/60 text-red-300",
-  "Sob Medida": "bg-indigo-900/60 text-indigo-300",
-  Naval: "bg-cyan-900/60 text-cyan-300",
-  Fabricação: "bg-teal-900/60 text-teal-300",
+  Versátil: "bg-blue-900/60 text-blue-300",
+  Industrial: "bg-indigo-900/60 text-indigo-300",
+  Restaurante: "bg-amber-900/60 text-amber-300",
+  Comercial: "bg-orange-900/60 text-orange-300",
+  Precisão: "bg-red-900/60 text-red-300",
+  Plástico: "bg-purple-900/60 text-purple-300",
+  "Alta Potência": "bg-slate-700/60 text-slate-300",
+  "Ar Quente": "bg-teal-900/60 text-teal-300",
+  Infravermelho: "bg-yellow-900/60 text-yellow-300",
+  Forno: "bg-orange-900/60 text-orange-300",
+  Doméstico: "bg-red-900/60 text-red-300",
+  Sauna: "bg-amber-900/60 text-amber-300",
 };
 
+// ── componente principal ────────────────────────────────────────
 export default function Home() {
   const [form, setForm] = useState({ nome: "", telefone: "", mensagem: "" });
   const [enviado, setEnviado] = useState(false);
@@ -79,7 +265,6 @@ export default function Home() {
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const msg = encodeURIComponent(`Olá! Me chamo ${form.nome}.\n${form.mensagem}\nTelefone: ${form.telefone}`);
@@ -92,78 +277,69 @@ export default function Home() {
   return (
     <main className="font-sans bg-[#07111f]">
 
-      {/* BOTÕES FLUTUANTES */}
+      {/* ── BOTÕES FLUTUANTES ── */}
       <div className="fixed bottom-6 right-5 z-50 flex flex-col items-end gap-3">
         {floatOpen && (
-          <>
-            <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2.5 rounded-full shadow-lg transition-all hover:scale-105 text-sm font-bold">
-              <ShopeeIcon className="w-4 h-4" /> Shopee
-            </a>
-            <a href={IG_URL} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90 text-white px-4 py-2.5 rounded-full shadow-lg transition-all hover:scale-105 text-sm font-bold">
-              <IgIcon className="w-4 h-4" /> Instagram
-            </a>
-            <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2.5 rounded-full shadow-lg transition-all hover:scale-105 text-sm font-bold">
-              <WaIcon className="w-4 h-4" /> WhatsApp
-            </a>
-          </>
+          <div className="flex flex-col items-end gap-2.5 animate-in slide-in-from-bottom-4">
+            {[
+              { href: GOOGLE_URL, bg: "bg-white", icon: "⭐", label: "Google", text: "text-yellow-500" },
+              { href: SHOPEE_URL, bg: "bg-orange-500 hover:bg-orange-600", icon: <ShopeeIcon className="w-5 h-5" />, label: "Shopee", text: "text-white" },
+              { href: FB_URL, bg: "bg-[#1877f2] hover:bg-blue-700", icon: <FbIcon className="w-5 h-5" />, label: "Facebook", text: "text-white" },
+              { href: IG_URL, bg: "bg-gradient-to-r from-purple-600 to-pink-600 hover:opacity-90", icon: <IgIcon className="w-5 h-5" />, label: "Instagram", text: "text-white" },
+              { href: EMAIL_URL, bg: "bg-[#F5B800] hover:bg-yellow-400", icon: "✉", label: "E-mail", text: "text-[#07111f] font-bold" },
+              { href: WA_URL, bg: "bg-green-500 hover:bg-green-600", icon: <WaIcon className="w-5 h-5" />, label: "(21) 96598-7979", text: "text-white" },
+            ].map((btn, i) => (
+              <a key={i} href={btn.href} target="_blank" rel="noopener noreferrer"
+                className={`flex items-center gap-2.5 ${btn.bg} ${btn.text} px-4 py-2.5 rounded-full shadow-lg transition-all hover:scale-105 text-sm font-semibold`}>
+                {typeof btn.icon === "string" ? <span>{btn.icon}</span> : btn.icon}
+                {btn.label}
+              </a>
+            ))}
+          </div>
         )}
         <button onClick={() => setFloatOpen(!floatOpen)}
-          className="w-14 h-14 rounded-full bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] shadow-xl flex items-center justify-center transition-all hover:scale-110 font-bold">
-          {floatOpen ? (
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <WaIcon className="w-6 h-6" />
-          )}
+          className="w-14 h-14 rounded-full bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] shadow-xl flex items-center justify-center transition-all hover:scale-110 font-black text-xl"
+          aria-label="Contato rápido">
+          {floatOpen ? "✕" : <WaIcon className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* NAVBAR */}
+      {/* ── NAVBAR ── */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-[#07111f]/95 backdrop-blur-sm border-b border-[#F5B800]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-[#F5B800] rounded flex items-center justify-center font-black text-[#07111f] text-sm leading-none transform rotate-45 shrink-0">
+            <div className="w-9 h-9 bg-[#F5B800] rounded flex items-center justify-center font-black text-[#07111f] text-sm transform rotate-45 shrink-0">
               <span className="-rotate-45">RP</span>
             </div>
             <div className="ml-1">
               <span className="font-black text-white text-base leading-tight block tracking-wide">CASA RP</span>
-              <span className="text-[#F5B800] text-[10px] font-semibold leading-tight block tracking-widest uppercase">Resistências</span>
+              <span className="text-[#F5B800] text-[10px] font-semibold leading-tight block tracking-widest uppercase">Resistências Elétricas</span>
             </div>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-semibold">
-            <a href="#produtos" className="text-gray-300 hover:text-[#F5B800] transition-colors">Produtos</a>
             <a href="#sobre" className="text-gray-300 hover:text-[#F5B800] transition-colors">Sobre</a>
+            <a href="#catalogo" className="text-gray-300 hover:text-[#F5B800] transition-colors">Catálogo</a>
+            <a href="#servicos" className="text-gray-300 hover:text-[#F5B800] transition-colors">Serviços</a>
+            <a href="#avaliacoes" className="text-gray-300 hover:text-[#F5B800] transition-colors">Avaliações</a>
             <a href="#contato" className="text-gray-300 hover:text-[#F5B800] transition-colors">Contato</a>
-            <a href={IG_URL} target="_blank" rel="noopener noreferrer"
-              className="text-gray-300 hover:text-pink-400 transition-colors flex items-center gap-1">
-              <IgIcon className="w-4 h-4" /> Instagram
-            </a>
-            <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer"
-              className="text-gray-300 hover:text-orange-400 transition-colors">Shopee</a>
             <a href={WA_URL} target="_blank" rel="noopener noreferrer"
               className="bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black px-5 py-2 rounded-full transition-all hover:scale-105 flex items-center gap-2">
-              <WaIcon className="w-4 h-4" /> WhatsApp
+              <WaIcon className="w-4 h-4" /> Orçamento
             </a>
           </div>
           <a href={WA_URL} target="_blank" rel="noopener noreferrer"
             className="md:hidden bg-[#F5B800] text-[#07111f] px-3 py-1.5 rounded-full text-sm font-black">
-            WhatsApp
+            Orçamento
           </a>
         </div>
       </nav>
 
-      {/* HERO */}
+      {/* ── HERO ── */}
       <section className="min-h-screen flex items-center bg-[#07111f] relative overflow-hidden pt-16">
-        {/* Background dots pattern */}
         <div className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: "radial-gradient(circle, #F5B800 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#F5B800]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-900/20 rounded-full blur-3xl" />
-
+          style={{ backgroundImage: "radial-gradient(circle,#F5B800 1px,transparent 1px)", backgroundSize: "30px 30px" }} />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#F5B800]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900/20 rounded-full blur-3xl" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <div className="flex items-center gap-3 mb-6">
@@ -171,26 +347,30 @@ export default function Home() {
               <span className="text-[#F5B800] font-bold text-sm tracking-[0.2em] uppercase">Soluções que Aquecem</span>
               <div className="h-px w-8 bg-[#F5B800]" />
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none mb-2 tracking-tight">
-              CASA RP
+            <h1 className="font-black text-white leading-none mb-3 tracking-tight" style={{ fontSize: "clamp(2.5rem,5vw,4rem)" }}>
+              Resistências Elétricas
             </h1>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#F5B800] leading-none mb-8 tracking-tight">
-              RESISTÊNCIAS
+            <h2 className="font-black text-[#F5B800] leading-none mb-8 tracking-tight" style={{ fontSize: "clamp(1.8rem,4vw,3rem)" }}>
+              para Aquecimento<br />Industrial e Comercial
             </h2>
-            <p className="text-gray-300 text-lg leading-relaxed mb-3">
-              Resistências domésticas, comerciais, industriais, navais e hospitalares.
+            <p className="text-gray-300 text-lg leading-relaxed mb-2">
+              Fabricação, manutenção e reposição sob medida.
             </p>
             <p className="text-gray-400 text-base leading-relaxed mb-10">
-              Há mais de 20 anos em Niterói/RJ, com envio para todo o Brasil.
+              Buffet · Banho-maria · Forno · Churrasqueira · Sauna · Autoclave · Marmiteiro · Máquinas Industriais
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-                className="bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black px-8 py-4 rounded-xl transition-all hover:scale-105 shadow-lg shadow-yellow-900/30 flex items-center gap-3 text-base">
-                <WaIcon className="w-5 h-5" /> Solicite seu Orçamento
+              <a href={EMAIL_URL}
+                className="bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black px-8 py-4 rounded-xl transition-all hover:scale-105 shadow-lg shadow-yellow-900/30 text-base">
+                ✉ Solicitar Orçamento
               </a>
-              <a href="#produtos"
-                className="border-2 border-[#F5B800]/50 hover:border-[#F5B800] text-[#F5B800] font-bold px-8 py-4 rounded-xl transition-all hover:bg-[#F5B800]/5 text-base">
-                Ver Produtos
+              <a href={WA_URL} target="_blank" rel="noopener noreferrer"
+                className="bg-green-500 hover:bg-green-600 text-white font-black px-8 py-4 rounded-xl transition-all hover:scale-105 flex items-center gap-2 text-base">
+                <WaIcon className="w-5 h-5" /> WhatsApp
+              </a>
+              <a href="#catalogo"
+                className="border-2 border-[#F5B800]/40 hover:border-[#F5B800] text-[#F5B800] font-bold px-8 py-4 rounded-xl transition-all text-base">
+                Ver Catálogo
               </a>
             </div>
             <div className="flex flex-wrap gap-6 mt-8">
@@ -200,41 +380,41 @@ export default function Home() {
               </a>
               <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors text-sm font-medium">
-                <ShopeeIcon className="w-4 h-4" /> Loja na Shopee
+                <ShopeeIcon className="w-4 h-4" /> Nossa Shopee
+              </a>
+              <a href={GOOGLE_URL} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-2 text-gray-400 hover:text-yellow-400 transition-colors text-sm font-medium">
+                ⭐ Avaliações Google
               </a>
             </div>
           </div>
 
-          {/* Lado direito hero */}
+          {/* card lateral hero */}
           <div className="hidden lg:flex justify-center">
             <div className="relative">
               <div className="absolute inset-0 bg-[#F5B800]/10 rounded-3xl blur-2xl scale-110" />
-              <div className="relative bg-[#0d1f3c] border border-[#F5B800]/30 rounded-3xl p-8 space-y-4 w-80">
-                <div className="text-center border-b border-[#F5B800]/20 pb-4">
-                  <div className="flex items-center justify-center gap-2 mb-1">
-                    <div className="w-8 h-8 bg-[#F5B800] rounded flex items-center justify-center font-black text-[#07111f] text-xs transform rotate-45">
-                      <span className="-rotate-45">RP</span>
-                    </div>
-                    <span className="text-white font-black text-lg tracking-wide">CASA RP</span>
-                  </div>
-                  <span className="text-[#F5B800] text-xs font-bold tracking-widest uppercase">Resistências</span>
+              <div className="relative bg-[#0d1f3c] border border-[#F5B800]/30 rounded-3xl p-8 w-80">
+                <div className="text-center border-b border-[#F5B800]/20 pb-4 mb-5">
+                  <p className="text-[#F5B800] font-black text-xs tracking-[0.2em] uppercase mb-1">Atendemos</p>
+                  <p className="text-white font-black text-sm">RJ · Niterói · São Gonçalo<br/>e todo o Brasil</p>
                 </div>
                 {[
-                  "Resistências Domésticas",
-                  "Resistências Comerciais",
-                  "Resistências Industriais",
-                  "Resistências Navais",
-                  "Resistências Hospitalares",
-                  "Conserto de Equipamentos",
+                  "Resistências para Chuveiro",
+                  "Banho-Maria e Buffet",
+                  "Forno e Churrasqueira",
+                  "Sauna Seca",
+                  "Autoclave e Hospitalar",
+                  "Máquinas Industriais",
+                  "Marmiteiro e Estufa",
                   "Fabricação Sob Medida",
                 ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
+                  <div key={i} className="flex items-center gap-3 mb-3">
                     <div className="w-1.5 h-1.5 bg-[#F5B800] rounded-full shrink-0" />
                     <span className="text-gray-300 text-sm">{item}</span>
                   </div>
                 ))}
-                <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-                  className="block w-full mt-4 bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black py-3 rounded-xl text-center text-sm transition-all hover:scale-105">
+                <a href={EMAIL_URL}
+                  className="block w-full mt-5 bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black py-3 rounded-xl text-center text-sm transition-all hover:scale-105">
                   SOLICITE SEU ORÇAMENTO
                 </a>
               </div>
@@ -243,14 +423,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATS STRIP */}
+      {/* ── STATS ── */}
       <section className="bg-[#F5B800] py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-[#07111f]">
             {[
               { num: "20+", label: "Anos de mercado" },
               { num: "500+", label: "Clientes atendidos" },
-              { num: "100+", label: "Produtos disponíveis" },
+              { num: "12+", label: "Tipos de resistência" },
               { num: "BR", label: "Envio para todo o Brasil" },
             ].map((s, i) => (
               <div key={i}>
@@ -262,100 +442,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRODUTOS */}
-      <section id="produtos" className="py-24 bg-[#07111f]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="h-px w-10 bg-[#F5B800]" />
-              <span className="text-[#F5B800] font-bold text-sm tracking-[0.2em] uppercase">Nossos Produtos</span>
-              <div className="h-px w-10 bg-[#F5B800]" />
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-white">
-              Soluções para cada <span className="text-[#F5B800]">necessidade</span>
-            </h2>
-            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-              Trabalhamos com resistências domésticas, comerciais, industriais, navais e hospitalares.
-              Peças novas, originais e fabricação sob medida.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {products.map((p, i) => (
-              <a key={i} href={WA_URL} target="_blank" rel="noopener noreferrer"
-                className="group bg-[#0d1f3c] border border-white/5 hover:border-[#F5B800]/50 rounded-2xl p-6 transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-900/20 block">
-                <div className="flex items-start justify-between mb-4">
-                  <span className="text-4xl">{p.icon}</span>
-                  <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${tagColors[p.tag] ?? "bg-gray-800 text-gray-400"}`}>
-                    {p.tag}
-                  </span>
-                </div>
-                <h3 className="text-white font-bold text-lg mb-2 group-hover:text-[#F5B800] transition-colors leading-snug">
-                  {p.name}
-                </h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-4">{p.desc}</p>
-                <div className="flex items-center gap-2 text-[#F5B800] text-sm font-bold">
-                  <WaIcon className="w-4 h-4" />
-                  Solicitar orçamento
-                </div>
-              </a>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-gray-400 mb-4">Veja mais produtos e compre online</p>
-            <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-xl transition-all hover:scale-105 shadow-md">
-              <ShopeeIcon className="w-5 h-5" />
-              Visitar nossa Shopee
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* URGÊNCIA */}
-      <section className="py-20 bg-[#0d1f3c] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5"
-          style={{ backgroundImage: "radial-gradient(circle, #F5B800 1px, transparent 1px)", backgroundSize: "24px 24px" }} />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-[#F5B800]" />
-            <span className="text-[#F5B800] font-bold text-sm tracking-widest uppercase">Atendimento Rápido</span>
-            <div className="h-px w-8 bg-[#F5B800]" />
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-3">
-            PRECISANDO DAQUELA
-          </h2>
-          <h2 className="text-4xl sm:text-5xl font-black text-[#F5B800] leading-tight mb-6">
-            RESISTÊNCIA COM URGÊNCIA?
-          </h2>
-          <p className="text-gray-300 text-lg mb-4">
-            Atendimento rápido para <strong className="text-white">Rio de Janeiro, Niterói e São Gonçalo</strong>
-          </p>
-          <p className="text-gray-400 mb-10">Envio para todo o Brasil • Entrega rápida • Peças novas e sob medida</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a href={WA_URL} target="_blank" rel="noopener noreferrer"
-              className="bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black px-10 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-xl shadow-yellow-900/30 flex items-center gap-3">
-              <WaIcon className="w-6 h-6" />
-              FAÇA SEU ORÇAMENTO
-            </a>
-          </div>
-          <div className="flex flex-wrap justify-center gap-8 mt-10 text-sm text-gray-400">
-            {[
-              { icon: "🚚", label: "Entrega Rápida" },
-              { icon: "🎧", label: "Atendimento Especializado" },
-              { icon: "📦", label: "Peças Novas e Sob Medida" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-2 font-semibold">
-                <span>{item.icon}</span>
-                <span className="text-white">{item.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SOBRE */}
+      {/* ── SOBRE ── */}
       <section id="sobre" className="py-24 bg-[#07111f]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -365,37 +452,31 @@ export default function Home() {
                 <span className="text-[#F5B800] font-bold text-sm tracking-widest uppercase">Sobre Nós</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-black text-white mb-6 leading-tight">
-                Tradição e qualidade em{" "}
-                <span className="text-[#F5B800]">resistências elétricas</span>
+                A <span className="text-[#F5B800]">Casa RP</span> Resistências Elétricas
               </h2>
               <p className="text-gray-300 leading-relaxed mb-4">
-                A Casa RP Resistências é uma empresa especializada em soluções de aquecimento elétrico,
-                localizada no Centro de <strong className="text-white">Niterói, RJ</strong>. Com mais de 20 anos de
-                experiência, somos referência em qualidade, confiabilidade e atendimento técnico especializado.
+                A Casa RP Resistências Elétricas é especializada em soluções de aquecimento elétrico para equipamentos comerciais e industriais, localizada no Centro de <strong className="text-white">Niterói/RJ</strong>. Com mais de 20 anos de mercado, somos referência em fabricação, manutenção e reposição de resistências elétricas.
               </p>
               <p className="text-gray-400 leading-relaxed mb-4">
-                Trabalhamos com resistências domésticas, comerciais, industriais, navais e hospitalares —
-                desde a reposição de peças originais até fabricação sob medida para qualquer equipamento.
+                Atendemos quem precisa de resistências para calor: buffet self-service, banho-maria, forno industrial, churrasqueira elétrica, sauna seca, autoclave, marmiteiro, máquinas industriais, aquecedores — e muito mais.
               </p>
               <p className="text-gray-400 leading-relaxed mb-8">
-                Atendemos Rio de Janeiro, Niterói e São Gonçalo com entrega rápida, e enviamos para todo o Brasil.
+                Trabalhamos com resistências tubulares, cartucho, coleira, flangeadas, aletadas, cerâmicas e <strong className="text-white">fabricação sob medida</strong> para qualquer equipamento.
               </p>
               <div className="flex flex-wrap gap-3">
-                <a href={WA_URL} target="_blank" rel="noopener noreferrer"
+                <a href={EMAIL_URL}
                   className="inline-flex items-center gap-2 bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black px-6 py-3 rounded-xl transition-all hover:scale-105">
-                  <WaIcon className="w-4 h-4" /> Fale conosco
+                  ✉ Solicitar Orçamento
                 </a>
-                <a href={IG_URL} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 border border-white/20 hover:border-pink-400/60 text-white hover:text-pink-400 font-semibold px-6 py-3 rounded-xl transition-colors">
-                  <IgIcon className="w-4 h-4" /> @rp_resistencias
+                <a href={GOOGLE_URL} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 border border-white/20 hover:border-yellow-400/60 text-white hover:text-yellow-400 font-semibold px-6 py-3 rounded-xl transition-colors">
+                  ⭐ Ver Avaliações
                 </a>
               </div>
             </div>
-
             <div className="grid grid-cols-1 gap-3">
               {diferenciais.map((d, i) => (
-                <div key={i}
-                  className="flex items-center gap-4 bg-[#0d1f3c] border border-white/5 hover:border-[#F5B800]/30 rounded-xl p-4 transition-colors">
+                <div key={i} className="flex items-center gap-4 bg-[#0d1f3c] border border-white/5 hover:border-[#F5B800]/30 rounded-xl p-4 transition-colors">
                   <span className="text-2xl">{d.icon}</span>
                   <div>
                     <div className="text-white font-bold text-sm">{d.title}</div>
@@ -408,7 +489,193 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTATO */}
+      {/* ── CATÁLOGO ── */}
+      <section id="catalogo" className="py-24 bg-[#0d1f3c]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="h-px w-10 bg-[#F5B800]" />
+              <span className="text-[#F5B800] font-bold text-sm tracking-[0.2em] uppercase">Catálogo Completo</span>
+              <div className="h-px w-10 bg-[#F5B800]" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-white">
+              12 Tipos de <span className="text-[#F5B800]">Resistências Elétricas</span>
+            </h2>
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+              Fabricação sob medida ou reposição imediata. Solicite orçamento por e-mail ou WhatsApp.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {products.map((p, i) => (
+              <article key={i}
+                className="bg-[#07111f] border border-white/5 hover:border-[#F5B800]/50 rounded-2xl overflow-hidden flex flex-col transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-900/20 group">
+                {/* header com gradiente */}
+                <div className={`h-36 bg-gradient-to-br ${p.grad} flex items-center justify-center text-5xl relative`}>
+                  <span className="drop-shadow-lg">{p.emoji}</span>
+                  <div className={`absolute top-3 right-3 text-xs font-bold px-2.5 py-1 rounded-full ${p.tagColor}`}>
+                    {p.tag}
+                  </div>
+                </div>
+                <div className="p-5 flex flex-col flex-1 gap-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-white font-black text-base leading-snug group-hover:text-[#F5B800] transition-colors">
+                      {p.name}
+                    </h3>
+                    <span className="text-[#F5B800] text-xs font-bold px-2 py-1 bg-[#F5B800]/10 border border-[#F5B800]/20 rounded-full whitespace-nowrap shrink-0">
+                      {p.price}
+                    </span>
+                  </div>
+                  <p className="text-gray-400 text-sm leading-relaxed">{p.desc}</p>
+                  <div className="grid grid-cols-2 gap-1.5 text-xs">
+                    {[
+                      { l: "⚡ Potência", v: p.power },
+                      { l: "🔌 Voltagem", v: p.voltage },
+                      { l: "🔩 Material", v: p.material },
+                      { l: "📍 Uso", v: p.use },
+                    ].map((s, j) => (
+                      <div key={j} className="bg-[#0d1f3c] rounded-lg p-2">
+                        <div className="text-gray-500 text-[10px] mb-0.5">{s.l}</div>
+                        <div className="text-gray-300 font-medium leading-tight">{s.v}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-xs text-gray-500 border-l-2 border-[#F5B800]/40 pl-3 leading-relaxed">
+                    {p.obs}
+                  </div>
+                  <a href={`${EMAIL_URL}&body=Olá! Tenho interesse em: ${p.name}`}
+                    className="mt-auto block text-center bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black py-2.5 rounded-xl text-sm transition-all hover:scale-105">
+                    Solicitar Orçamento
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
+            <p className="text-gray-400 mb-4">Veja mais produtos e compre online</p>
+            <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-3.5 rounded-xl transition-all hover:scale-105">
+              <ShopeeIcon className="w-5 h-5" /> Visitar nossa Shopee
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVIÇOS / FLYERS ── */}
+      <section id="servicos" className="py-24 bg-[#07111f]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="h-px w-10 bg-[#F5B800]" />
+              <span className="text-[#F5B800] font-bold text-sm tracking-[0.2em] uppercase">Também Atendemos</span>
+              <div className="h-px w-10 bg-[#F5B800]" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-white">
+              Serviços <span className="text-[#F5B800]">Especializados</span>
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {servicos.map((s, i) => (
+              <a key={i} href={`${EMAIL_URL}&body=Olá! Preciso de informações sobre: ${s.name}`}
+                className="group bg-[#0d1f3c] border border-white/5 hover:border-[#F5B800]/50 rounded-2xl overflow-hidden transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-900/20">
+                <div className="h-44 bg-gradient-to-br from-[#07111f] to-[#0d1f3c] flex items-center justify-center text-6xl relative overflow-hidden">
+                  {s.img ? (
+                    <Image
+                      src={s.img}
+                      alt={s.name}
+                      fill
+                      className="object-cover opacity-60 group-hover:opacity-80 transition-opacity"
+                      sizes="(max-width:768px) 100vw, 33vw"
+                    />
+                  ) : null}
+                  <span className={`relative z-10 drop-shadow-lg ${s.img ? "text-5xl" : ""}`}>{s.emoji}</span>
+                </div>
+                <div className="p-5">
+                  <h3 className="text-white font-black text-base mb-2 group-hover:text-[#F5B800] transition-colors leading-snug">{s.name}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-4">{s.desc}</p>
+                  <span className="text-[#F5B800] text-sm font-bold flex items-center gap-1">
+                    Solicitar orçamento
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── URGÊNCIA ── */}
+      <section className="py-20 bg-[#0d1f3c] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5"
+          style={{ backgroundImage: "radial-gradient(circle,#F5B800 1px,transparent 1px)", backgroundSize: "24px 24px" }} />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="h-px w-8 bg-[#F5B800]" />
+            <span className="text-[#F5B800] font-bold text-sm tracking-widest uppercase">Atendimento Rápido</span>
+            <div className="h-px w-8 bg-[#F5B800]" />
+          </div>
+          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-3">PRECISANDO DAQUELA</h2>
+          <h2 className="text-4xl sm:text-5xl font-black text-[#F5B800] leading-tight mb-6">RESISTÊNCIA COM URGÊNCIA?</h2>
+          <p className="text-gray-300 text-lg mb-2">
+            Atendimento rápido para <strong className="text-white">Rio de Janeiro, Niterói e São Gonçalo</strong>
+          </p>
+          <p className="text-gray-400 mb-10">Envio para todo o Brasil · Entrega rápida · Peças novas e sob medida</p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a href={EMAIL_URL}
+              className="bg-[#F5B800] hover:bg-yellow-400 text-[#07111f] font-black px-10 py-4 rounded-2xl text-lg transition-all hover:scale-105 shadow-xl shadow-yellow-900/30">
+              ✉ FAÇA SEU ORÇAMENTO
+            </a>
+            <a href={WA_URL} target="_blank" rel="noopener noreferrer"
+              className="bg-green-500 hover:bg-green-600 text-white font-black px-10 py-4 rounded-2xl text-lg transition-all hover:scale-105 flex items-center gap-3">
+              <WaIcon className="w-6 h-6" /> WHATSAPP
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── AVALIAÇÕES ── */}
+      <section id="avaliacoes" className="py-24 bg-[#07111f]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="h-px w-8 bg-[#F5B800]" />
+              <span className="text-[#F5B800] font-bold text-sm tracking-widest uppercase">O que dizem nossos clientes</span>
+              <div className="h-px w-8 bg-[#F5B800]" />
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-white">
+              Avaliações <span className="text-[#F5B800]">dos Clientes</span>
+            </h2>
+            <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+              Confira as avaliações reais no Google. Sua opinião é muito importante para nós.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-5 mb-10">
+            {[1, 2, 3].map((_, i) => (
+              <div key={i} className="bg-[#0d1f3c] border border-white/5 rounded-2xl p-6">
+                <div className="text-[#F5B800] text-lg mb-3">★★★★★</div>
+                <p className="text-gray-400 text-sm italic leading-relaxed mb-4">
+                  "Espaço reservado para depoimento real. Acesse nossas avaliações no Google para ver o que nossos clientes dizem."
+                </p>
+                <div className="flex items-center gap-2 text-gray-500 text-xs">
+                  <span className="text-xl">👤</span>
+                  <span>Cliente verificado · Google</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <a href={GOOGLE_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 border-2 border-[#F5B800]/40 hover:border-[#F5B800] text-[#F5B800] font-black px-8 py-4 rounded-xl transition-all hover:bg-[#F5B800]/5 text-base">
+              ⭐ Ver todas as avaliações no Google
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CONTATO ── */}
       <section id="contato" className="py-24 bg-[#0d1f3c]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -418,30 +685,25 @@ export default function Home() {
               <div className="h-px w-8 bg-[#F5B800]" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white">Fale com a gente</h2>
-            <p className="text-gray-400 mt-4 max-w-xl mx-auto">
-              Atendimento rápido e especializado. Envie sua mensagem ou ligue agora.
-            </p>
           </div>
-
           <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Formulário */}
             <form onSubmit={handleSubmit} className="bg-[#07111f] border border-white/10 rounded-2xl p-8 space-y-5">
-              <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-1.5">Nome</label>
-                <input type="text" name="nome" value={form.nome} onChange={handleChange} required
-                  placeholder="Seu nome"
-                  className="w-full bg-[#0d1f3c] border border-white/10 focus:border-[#F5B800]/60 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none transition" />
-              </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-300 mb-1.5">Telefone / WhatsApp</label>
-                <input type="tel" name="telefone" value={form.telefone} onChange={handleChange} required
-                  placeholder="(21) 99999-9999"
-                  className="w-full bg-[#0d1f3c] border border-white/10 focus:border-[#F5B800]/60 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none transition" />
-              </div>
+              <h3 className="text-white font-black text-xl">Descreva sua necessidade</h3>
+              {[
+                { label: "Nome", name: "nome", type: "text", placeholder: "Seu nome ou empresa" },
+                { label: "Telefone / WhatsApp", name: "telefone", type: "tel", placeholder: "(21) 99999-9999" },
+              ].map((f) => (
+                <div key={f.name}>
+                  <label className="block text-sm font-semibold text-gray-300 mb-1.5">{f.label}</label>
+                  <input type={f.type} name={f.name} value={(form as any)[f.name]} onChange={handleChange} required
+                    placeholder={f.placeholder}
+                    className="w-full bg-[#0d1f3c] border border-white/10 focus:border-[#F5B800]/60 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none transition" />
+                </div>
+              ))}
               <div>
                 <label className="block text-sm font-semibold text-gray-300 mb-1.5">Mensagem</label>
                 <textarea name="mensagem" value={form.mensagem} onChange={handleChange} required rows={4}
-                  placeholder="Qual produto ou serviço você precisa?"
+                  placeholder="Qual resistência você precisa? Informe o equipamento, potência, voltagem e urgência."
                   className="w-full bg-[#0d1f3c] border border-white/10 focus:border-[#F5B800]/60 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none transition resize-none" />
               </div>
               <button type="submit"
@@ -449,76 +711,23 @@ export default function Home() {
                 <WaIcon className="w-5 h-5" />
                 {enviado ? "Mensagem enviada! ✓" : "Enviar pelo WhatsApp"}
               </button>
+              <p className="text-center text-xs text-gray-500">ou envie por e-mail: <a href={EMAIL_URL} className="text-[#F5B800] hover:underline">{EMAIL}</a></p>
             </form>
 
-            {/* Cards de contato */}
             <div className="space-y-3">
               {[
-                {
-                  href: WA_URL, bg: "hover:border-green-500/40",
-                  iconBg: "bg-green-900/50 text-green-400",
-                  icon: <WaIcon className="w-5 h-5" />,
-                  title: "WhatsApp",
-                  value: "(21) 96598-7979",
-                  sub: "Atendimento rápido",
-                },
-                {
-                  href: "tel:+552126208167", bg: "hover:border-blue-500/40",
-                  iconBg: "bg-blue-900/50 text-blue-400",
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  ),
-                  title: "Telefone Fixo",
-                  value: "(21) 2620-8167",
-                  sub: "Seg–Sex 8h às 18h · Sáb 8h às 12h",
-                },
-                {
-                  href: "mailto:casarpresistenciaseletrica@hotmail.com", bg: "hover:border-yellow-500/40",
-                  iconBg: "bg-yellow-900/50 text-yellow-400",
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  ),
-                  title: "E-mail",
-                  value: "casarpresistenciaseletrica@hotmail.com",
-                  sub: "Resposta em até 24h",
-                },
-                {
-                  href: MAPS_URL, bg: "hover:border-[#F5B800]/40",
-                  iconBg: "bg-[#F5B800]/20 text-[#F5B800]",
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  ),
-                  title: "Endereço",
-                  value: "Rua Visconde do Uruguai, 264",
-                  sub: "Centro – Niterói, RJ",
-                },
-                {
-                  href: IG_URL, bg: "hover:border-pink-500/40",
-                  iconBg: "bg-pink-900/50 text-pink-400",
-                  icon: <IgIcon className="w-5 h-5" />,
-                  title: "Instagram",
-                  value: "@rp_resistencias",
-                  sub: "Siga e veja novidades",
-                },
-                {
-                  href: SHOPEE_URL, bg: "hover:border-orange-500/40",
-                  iconBg: "bg-orange-900/50 text-orange-400",
-                  icon: <ShopeeIcon className="w-5 h-5" />,
-                  title: "Shopee",
-                  value: "shopee.com.br/casarp",
-                  sub: "Compre online com segurança",
-                },
+                { href: WA_URL, iconBg: "bg-green-900/50 text-green-400", icon: <WaIcon className="w-5 h-5" />, title: "WhatsApp", value: "(21) 96598-7979", sub: "Atendimento rápido" },
+                { href: "tel:+552126208167", iconBg: "bg-blue-900/50 text-blue-400", icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>, title: "Telefone Fixo", value: "(21) 2620-8167", sub: "Seg–Sex 8h às 18h · Sáb 8h às 12h" },
+                { href: EMAIL_URL, iconBg: "bg-[#F5B800]/20 text-[#F5B800]", icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>, title: "E-mail", value: EMAIL, sub: "Resposta em até 24h" },
+                { href: MAPS_URL, iconBg: "bg-blue-900/50 text-blue-400", icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>, title: "Endereço", value: "Rua Visconde do Uruguai, 264", sub: "Centro – Niterói, RJ" },
+                { href: GOOGLE_URL, iconBg: "bg-yellow-900/50 text-yellow-400", icon: <span className="text-base">⭐</span>, title: "Google Avaliações", value: "Ver no Google", sub: "Avaliações reais de clientes" },
+                { href: IG_URL, iconBg: "bg-pink-900/50 text-pink-400", icon: <IgIcon className="w-5 h-5" />, title: "Instagram", value: "@rp_resistencias", sub: "Siga e veja novidades" },
+                { href: FB_URL, iconBg: "bg-blue-900/50 text-blue-400", icon: <FbIcon className="w-5 h-5" />, title: "Facebook", value: "Casa RP Resistências", sub: "Curtiu? Deixa uma avaliação" },
+                { href: SHOPEE_URL, iconBg: "bg-orange-900/50 text-orange-400", icon: <ShopeeIcon className="w-5 h-5" />, title: "Shopee", value: "shopee.com.br/casarp", sub: "Compre online com segurança" },
               ].map((c, i) => (
                 <a key={i} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className={`flex items-center gap-4 bg-[#07111f] border border-white/5 ${c.bg} rounded-xl p-4 transition-all hover:shadow-md group`}>
+                  className="flex items-center gap-4 bg-[#07111f] border border-white/5 hover:border-[#F5B800]/30 rounded-xl p-3.5 transition-all hover:shadow-md group">
                   <div className={`${c.iconBg} rounded-xl p-2.5 shrink-0`}>{c.icon}</div>
                   <div className="min-w-0">
                     <div className="text-gray-400 text-xs font-semibold uppercase tracking-wide">{c.title}</div>
@@ -532,7 +741,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* ── FOOTER ── */}
       <footer className="bg-[#030c17] border-t border-[#F5B800]/20 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -541,7 +750,7 @@ export default function Home() {
                 <span className="-rotate-45">RP</span>
               </div>
               <div>
-                <span className="text-white font-black tracking-wide block">CASA RP RESISTÊNCIAS</span>
+                <span className="text-white font-black tracking-wide block">CASA RP RESISTÊNCIAS ELÉTRICAS</span>
                 <span className="text-[#F5B800] text-xs tracking-widest uppercase">Soluções que Aquecem</span>
               </div>
             </div>
@@ -551,22 +760,20 @@ export default function Home() {
                 <a href="tel:+552126208167" className="hover:text-white">(21) 2620-8167</a>
                 {" · "}
                 <a href={WA_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#F5B800]">(21) 96598-7979</a>
+                {" · "}
+                <a href={EMAIL_URL} className="hover:text-[#F5B800]">{EMAIL}</a>
               </p>
             </div>
             <div className="flex gap-4 items-center">
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-pink-400 transition-colors">
-                <IgIcon className="w-5 h-5" />
-              </a>
-              <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-orange-400 transition-colors">
-                <ShopeeIcon className="w-5 h-5" />
-              </a>
-              <a href={WA_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-green-400 transition-colors">
-                <WaIcon className="w-5 h-5" />
-              </a>
+              <a href={IG_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-pink-400 transition-colors"><IgIcon className="w-5 h-5" /></a>
+              <a href={FB_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-400 transition-colors"><FbIcon className="w-5 h-5" /></a>
+              <a href={SHOPEE_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-orange-400 transition-colors"><ShopeeIcon className="w-5 h-5" /></a>
+              <a href={WA_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-green-400 transition-colors"><WaIcon className="w-5 h-5" /></a>
+              <a href={GOOGLE_URL} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-yellow-400 transition-colors text-base">⭐</a>
             </div>
           </div>
           <div className="border-t border-white/5 mt-6 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2">
-            <p className="text-gray-600 text-xs">© {new Date().getFullYear()} Casa RP Resistências. Todos os direitos reservados.</p>
+            <p className="text-gray-600 text-xs">© {new Date().getFullYear()} Casa RP Resistências Elétricas. Todos os direitos reservados.</p>
             <p className="text-[#F5B800] text-xs font-bold tracking-widest uppercase">🚚 Envio para todo o Brasil</p>
           </div>
         </div>
